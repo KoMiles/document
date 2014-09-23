@@ -700,7 +700,7 @@ INSERT INTO met_config VALUES('58','physical_function','1','','0','0','metinfo')
 INSERT INTO met_config VALUES('59','metconfig_member_force','byuqujz','','0','0','metinfo');
 INSERT INTO met_config VALUES('61','metconfig_nurse_sendtime','10','','0','0','metinfo');
 INSERT INTO met_config VALUES('62','metconfig_recycle','1','','0','0','metinfo');
-INSERT INTO met_config VALUES('534','metconfig_tablename','admin_array|admin_table|admin_column|app|column|config|cv|download|feedback|flash|flist|img|job|label|lang|language|link|list|message|news|online|otherinfo|parameter|plist|product|skin_table|sms|visit_day|visit_detail|visit_summary|mlist|ifcolumn|ifcolumn_addfile|ifmember_left|met_applist|met_app_plugin','','0','0','metinfo');
+INSERT INTO met_config VALUES('534','metconfig_tablename','admin_array|admin_table|admin_column|app|column|config|cv|download|feedback|flash|flist|img|job|label|lang|language|link|list|message|news|online|otherinfo|parameter|plist|product|skin_table|sms|visit_day|visit_detail|visit_summary|mlist|ifcolumn|ifcolumn_addfile|ifmember_left|applist|app_plugin','','0','0','metinfo');
 INSERT INTO met_config VALUES('539','metconfig_smsprice','0.1','','0','0','metinfo');
 INSERT INTO met_config VALUES('540','metconfig_agents_logo_login','templates/met/images/login-logo.png','','0','0','metinfo');
 INSERT INTO met_config VALUES('541','metconfig_agents_logo_index','templates/met/images/logoen.gif','','0','0','metinfo');
