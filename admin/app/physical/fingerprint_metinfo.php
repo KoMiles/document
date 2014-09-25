@@ -66,7 +66,7 @@ have=1
 filesize=1789
 [include/common.inc.php]
 have=1
-filesize=5669
+filesize=5683
 [include/export.func.php]
 have=1
 filesize=8075
@@ -348,7 +348,7 @@ have=1
 filesize=51742
 [public/php/metlabel.inc.php]
 have=1
-filesize=71523
+filesize=72644
 [public/php/newshtml.inc.php]
 have=1
 filesize=4005
@@ -1932,7 +1932,7 @@ have=1
 filesize=3702
 [admin/include/common.inc.php]
 have=1
-filesize=6894
+filesize=6908
 [admin/include/config.php]
 have=1
 filesize=913
