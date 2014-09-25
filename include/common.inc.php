@@ -119,7 +119,7 @@ $met_title=$met_hometitle!=''?$met_hometitle:$met_title;
 $member_index_url="index.php?lang=".$lang;
 $member_register_url="register.php?lang=".$lang;
 //接口
-if($_M['plugin']['web']){
+if($_M['plugin']['doweb']){
 	define('IN_MET', true);
 	if(file_exists(ROOTPATH.'app/system/include/class/mysql.class.php')){
 		require_once ROOTPATH.'app/system/include/class/mysql.class.php';
@@ -127,14 +127,14 @@ if($_M['plugin']['web']){
 		$db_settings = parse_ini_file(ROOTPATH.'config/config_db.php');
 		@extract($db_settings);
 		DB::dbconn($con_db_host, $con_db_id, $con_db_pass, $con_db_name);
-		foreach($_M['plugin']['web'] as $key => $val){
+		foreach($_M['plugin']['doweb'] as $key => $val){
 				$applistfile=ROOTPATH.'app/app/'.$val.'/plugin/'.'plugin_'.$val.'.class.php';
 				$_M['url']['own'] = $_M['url']['site'].'app/app/'.$val.'/';
 				if(file_exists($applistfile)&&!is_dir($applistfile)&&((file_get_contents($applistfile))!='metinfo')){
 					require_once $applistfile;
-					$name=str_replace('.class.php', '', 'plugin_'.$val);
-					$newclass=new $name;
-					call_user_func(array($newclass,  'web'));
+					$newclass=str_replace('.class.php', '', 'plugin_'.$val);
+					$newclass=new $newclass;
+					call_user_func(array($newclass,  'doweb'));
 				}
 		}
 		$_M['url']['own'] = '';

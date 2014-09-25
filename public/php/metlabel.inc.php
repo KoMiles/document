@@ -5,6 +5,7 @@
 function metlabel_html5($closure=1,$iehack=1,$mobile=0){
 	global $met_title,$show,$m_now_year,$navurl,$met_js_access,$met_skin_css,$img_url,$met_webname,$metcms_v,$appscriptcss,$met_ch_lang,$lang,$met_ch_mark,$met_url,$metinfouiok,$classnow,$class_list,$met_headstat;
 	global $met_wap,$met_wap_tpa,$met_wap_tpb,$met_webhtm,$met_wap_url,$module,$metinfonow,$met_member_force,$met_weburl,$met_wapshowtype;
+	global $_M;
 	$metinfo="<!DOCTYPE HTML>\n";
 	$metinfo.="<html>\n";
 	$metinfo.="<head>\n";
@@ -44,6 +45,9 @@ function metlabel_html5($closure=1,$iehack=1,$mobile=0){
 		if($metinfouiok==1)$metinfo.="<script src=\"{$navurl}public/ui/met/js/metinfo_ui.js\" type=\"text/javascript\"></script>\n";
 		if($met_ch_lang and $lang==$met_ch_mark)$metinfo.="<script src=\"".$met_url."js/ch.js\" type=\"text/javascript\"></script>\n";
 		if($appscriptcss)$metinfo.="{$appscriptcss}\n";
+		//接口代码
+		if($_M['html_plugin']['head_script'])$metinfo.="{$_M['html_plugin']['head_script']}";
+		//结束
 		if($iehack){
 		$metinfo.="<!--[if IE]>\n";
 		$metinfo.="<script src=\"{$navurl}public/js/html5.js\" type=\"text/javascript\"></script>\n";
@@ -128,12 +132,15 @@ function metlabel_flash(){
 	}
 }
 function metlabel_foot(){
-	global $met_footright,$met_footstat,$met_footaddress,$met_foottel,$met_footother,$met_foottext;
+	global $met_footright,$met_footstat,$met_footaddress,$met_foottel,$met_footother,$met_foottext,$_M;
 	if($met_footright<>"" or $met_footstat<>"")$metinfo.="<p>".$met_footright." ".$met_footstat."</p>\n";
 	if($met_footaddress<>"")$metinfo.="<p>".$met_footaddress."</p>\n";
 	if($met_foottel<>"")$metinfo.="<p>".$met_foottel."</p>\n";
 	if($met_footother<>"")$metinfo.="<p>".$met_footother."</p>\n";
 	if($met_foottext<>"")$metinfo.="<p>".$met_foottext."</p>\n";
+	//接口代码
+	if($_M['html_plugin']['foot_script'])$metinfo.="{$_M['html_plugin']['foot_script']}";
+	//结束
 	return $metinfo;
 }
 //顶部导航函数
@@ -274,14 +281,18 @@ function metlable_lang($dt,$tp=1){
 }
 //内页左侧栏目标签
 function metlabel_sidebar($title=0,$msow=0){
-	global $class_list,$classnow,$nav_list2,$class1;
+	global $class_list,$classnow,$nav_list2,$class1,$is_memberleft;
 	$thismod=$class_list[$classnow]['module'];
 	if($title){
 		$metinfo=$class_list[$class1]['name'];
 		if($thismod==11 || $thismod==10)$metinfo=$class_list[$classnow]['name'];
 	}else{
-		$metinfo=$thismod==11?methtml_advsearch():($thismod==10?membernavlist(1):($nav_list2[$class1]!=''?metlabel_navnow(2,'','','','',$msow):0));
-		if($thismod>99)$metinfo=metlabel_navnow(2,'','','','',$msow);
+		if(	$is_memberleft != 1){
+			$metinfo=$thismod==11?methtml_advsearch():($thismod==10?membernavlist(1):($nav_list2[$class1]!=''?metlabel_navnow(2,'','','','',$msow):0));
+			if($thismod>99)$metinfo=metlabel_navnow(2,'','','','',$msow);
+		}else{
+			$metinfo = membernavlist(1);
+		}
 	}
 	return $metinfo;
 }
@@ -294,7 +305,7 @@ function metlabel_navnow($type=1,$label='',$indexnum,$listyy=0,$listmax=8,$msow=
 		if($hngy5[1]=='cm')$class=$hngy5[0];
 	}
 	$mod=$class_index[$indexnum]['module'];
-	if($class_list[$class1]['module']>99 && !$indexnum){
+	if($class_list[$class1]['module']>99 && $class_list[$class1]['module']<1001 && !$indexnum){
 		$mod=$class_list[$class1]['module']==100?3:5;
 		$type=3;
 	}
@@ -534,46 +545,60 @@ if($titleok)$metinfo.="<h3 style='width:{$val[img_x]}px;'><a href='{$val[url]}' 
 
 //会员侧导航
 function membernavlist($type=0){
-	global $lang,$lang_memberIndex3,$lang_memberIndex4,$lang_memberIndex5,$lang_memberIndex6,$lang_memberIndex7,$lang_memberIndex10,$app_file,$met_adminfile,$met_mermber_metinfo_news_left_class,$db,$met_admin_table,$met_weburl,$met_adminfile,$metinfo_member_name,$met_ifmember_left;
+	global $lang,$lang_memberIndex3,$lang_memberIndex4,$lang_memberIndex5,$lang_memberIndex6,$lang_memberIndex7,$lang_memberIndex10,$app_file,$met_adminfile,$met_mermber_metinfo_news_left_class,$db,$met_admin_table,$met_weburl,$met_adminfile,$metinfo_member_name,$met_ifmember_left,$class_list;
 	$class=$met_mermber_metinfo_news_left_class?$met_mermber_metinfo_news_left_class:'membernavlist';/*兼容以前模板*/
 	$admin_list = $db->get_one("SELECT * FROM $met_admin_table WHERE admin_id='$metinfo_member_name' ");
 	$navigation = $db->get_all("SELECT * FROM $met_ifmember_left ");
 	if($type==1){
 		$metinfo.="<dl class='$class'>";
-		$metinfo.="<dt><a href='basic.php?lang={$lang}' title='{$lang_memberIndex3}'>{$lang_memberIndex3}</a></dt>";
+		$metinfo.="<dt><a href='../member/basic.php?lang={$lang}' title='{$lang_memberIndex3}'>{$lang_memberIndex3}</a></dt>";
 		foreach($navigation as $key=>$val){
-			$metinfo.="<dt><a href='{$val['foldername']}/{$val['filename']}' title='{$val['title']}'>{$val['title']}</a></dt>";
+			if($val[columnid]){
+				$column = $class_list[$val[columnid]];
+				$val['foldername'] = $val['foldername'] ? $val['foldername'] : $column['foldername'];
+				$val['filename'] = $val['filename'] ? $val['filename'] : 'index.php';
+				$metinfo.="<dt><a href='../{$val['foldername']}/{$val['filename']}' title='{$column['name']}'>{$column['name']}</a></dt>";
+			}else{
+				$metinfo.="<dt><a href='../{$val['foldername']}/{$val['filename']}' title='{$val['title']}'>{$val['title']}</a></dt>";
+			}
 		}
 		if($admin_list[usertype]==3){
 				
 		}else{
-			$metinfo.="<dt><a href='editor.php?lang={$lang}' title='{$lang_memberIndex4}'>{$lang_memberIndex4}</a></dt>";	
+			$metinfo.="<dt><a href='../member/editor.php?lang={$lang}' title='{$lang_memberIndex4}'>{$lang_memberIndex4}</a></dt>";	
 		}
 		//$metinfo.="<dt><a href='editor.php?lang={$lang}' title='{$lang_memberIndex4}'>{$lang_memberIndex4}</a></dt>";
-		$metinfo.="<dt><a href='feedback.php?lang={$lang}' title='{$lang_memberIndex5}'>{$lang_memberIndex5}</a></dt>";
-		$metinfo.="<dt><a href='message.php?lang={$lang}' title='{$lang_memberIndex6}'>{$lang_memberIndex6}</a></dt>";
-		$metinfo.="<dt><a href='cv.php?lang={$lang}' title='{$lang_memberIndex7}'>{$lang_memberIndex7}</a></dt>";
+		$metinfo.="<dt><a href='../member/feedback.php?lang={$lang}' title='{$lang_memberIndex5}'>{$lang_memberIndex5}</a></dt>";
+		$metinfo.="<dt><a href='../member/message.php?lang={$lang}' title='{$lang_memberIndex6}'>{$lang_memberIndex6}</a></dt>";
+		$metinfo.="<dt><a href='../member/cv.php?lang={$lang}' title='{$lang_memberIndex7}'>{$lang_memberIndex7}</a></dt>";
 		$file_site = explode('|',$app_file[3]);
 		foreach($file_site as $keyfile=>$valflie){
 			if(file_exists(ROOTPATH."$met_adminfile".$valflie)&&!is_dir(ROOTPATH."$met_adminfile".$valflie)&&((file_get_contents(ROOTPATH."$met_adminfile".$valflie))!='metinfo')){require ROOTPATH."$met_adminfile".$valflie;}
 		}
-		$metinfo.="<dt><a href='login_out.php?lang={$lang}' title='{$lang_memberIndex10}'>{$lang_memberIndex10}</a></dt>";
+		$metinfo.="<dt><a href='../member/login_out.php?lang={$lang}' title='{$lang_memberIndex10}'>{$lang_memberIndex10}</a></dt>";
 		$metinfo.="</dl>";
 	}else{
 		$metinfo.="<ul class='$class'>";
-		$metinfo.="<li><a href='basic.php?lang={$lang}' title='{$lang_memberIndex3}'>{$lang_memberIndex3}</a></li>";
+		$metinfo.="<li><a href='../member/basic.php?lang={$lang}' title='{$lang_memberIndex3}'>{$lang_memberIndex3}</a></li>";
 		foreach($navigation as $key=>$val){
-			$metinfo.="<dt><a href='{$val['foldername']}/{$val['filename']}' title='{$val['title']}'>{$val['title']}</a></dt>";
+			if($val[columnid]){
+				$column = $class_list[$val[columnid]];
+				$val['foldername'] = $val['foldername'] ? $val['foldername'] : $column['foldername'];
+				$val['filename'] = $val['filename'] ? $val['filename'] : 'index.php';
+				$metinfo.="<li><a href='../{$val['foldername']}/{$val['filename']}' title='{$column['name']}'>{$column['name']}</a></li>";
+			}else{
+				$metinfo.="<li><a href='../{$val['foldername']}/{$val['filename']}' title='{$val['title']}'>{$val['title']}</a></li>";
+			}
 		}
-		$metinfo.="<li><a href='editor.php?lang={$lang}' title='{$lang_memberIndex4}'>{$lang_memberIndex4}</a></li>";
-		$metinfo.="<li><a href='feedback.php?lang={$lang}' title='{$lang_memberIndex5}'>{$lang_memberIndex5}</a></li>";
-		$metinfo.="<li><a href='message.php?lang={$lang}' title='{$lang_memberIndex6}'>{$lang_memberIndex6}</a></li>";
-		$metinfo.="<li><a href='cv.php?lang={$lang}' title='{$lang_memberIndex7}'>{$lang_memberIndex7}</a></li>";
+		$metinfo.="<li><a href='../member/editor.php?lang={$lang}' title='{$lang_memberIndex4}'>{$lang_memberIndex4}</a></li>";
+		$metinfo.="<li><a href='../member/feedback.php?lang={$lang}' title='{$lang_memberIndex5}'>{$lang_memberIndex5}</a></li>";
+		$metinfo.="<li><a href='../member/message.php?lang={$lang}' title='{$lang_memberIndex6}'>{$lang_memberIndex6}</a></li>";
+		$metinfo.="<li><a href='../member/cv.php?lang={$lang}' title='{$lang_memberIndex7}'>{$lang_memberIndex7}</a></li>";
 		$file_site = explode('|',$app_file[3]);
 		foreach($file_site as $keyfile=>$valflie){
 			if(file_exists(ROOTPATH."$met_adminfile".$valflie)&&!is_dir(ROOTPATH."$met_adminfile".$valflie)&&((file_get_contents(ROOTPATH."$met_adminfile".$valflie))!='metinfo')){require ROOTPATH."$met_adminfile".$valflie;}
 		}
-		$metinfo.="<li><a href='login_out.php?lang={$lang}' title='{$lang_memberIndex10}'>{$lang_memberIndex10}</a></li>";
+		$metinfo.="<li><a href='../member/login_out.php?lang={$lang}' title='{$lang_memberIndex10}'>{$lang_memberIndex10}</a></li>";
 		$metinfo.="</ul>";
 	}
 	return $metinfo;

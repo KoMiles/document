@@ -140,7 +140,7 @@ if(!function_exists('ob_phpintan')) {
 	function ob_pcontent($content){return intval($content);}
 }
 //接口
-if($_M['plugin']['admin']){
+if($_M['plugin']['doadmin']){
 	define('IN_MET', true);
 	if(file_exists(ROOTPATH.'app/system/include/class/mysql.class.php')){
 		require_once ROOTPATH.'app/system/include/class/mysql.class.php';
@@ -148,14 +148,14 @@ if($_M['plugin']['admin']){
 		$db_settings = parse_ini_file(ROOTPATH.'config/config_db.php');
 		@extract($db_settings);
 		DB::dbconn($con_db_host, $con_db_id, $con_db_pass, $con_db_name);
-		foreach($_M['plugin']['admin'] as $key => $val){
+		foreach($_M['plugin']['doadmin'] as $key => $val){
 				$applistfile=ROOTPATH.'app/app/'.$val.'/plugin/'.'plugin_'.$val.'.class.php';
 				$_M['url']['own'] = $_M['url']['site'].'app/app/'.$val.'/';
 				if(file_exists($applistfile)&&!is_dir($applistfile)&&((file_get_contents($applistfile))!='metinfo')){
 					require_once $applistfile;
-					$name=str_replace('.class.php', '', 'plugin_'.$val);
-					$newclass=new $name;
-					call_user_func(array($newclass,  'admin'));
+					$newclass=str_replace('.class.php', '', 'plugin_'.$val);
+					$newclass=new $newclass;
+					call_user_func(array($newclass,  'doadmin'));
 				}
 		}
 		$_M['url']['own'] = '';
