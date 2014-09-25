@@ -19,7 +19,7 @@ required:必选项
 
 		// 默认值
 		settings=$.extend({
-			url:pubjspath+"js/examples/met/select-linkage/city.min.js",
+			url:pubjspath+"sea/examples/met/select-linkage/city.min.js",
 			prov:null,
 			city:null,
 			dist:null,

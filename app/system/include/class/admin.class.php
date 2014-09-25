@@ -17,9 +17,9 @@ class admin extends common {
 	  */
 	public function __construct() {
 		parent::__construct();
-		$this->check();
-		$this->load_language();
-		load::plugin('admin');
+		$this->load_language();//语言加载
+		$this->check();//验证管理员
+		load::plugin('doadmin');//插件加载
 	}
 	
 	/**

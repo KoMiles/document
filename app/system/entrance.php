@@ -3,8 +3,8 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 
 //°æ±¾ºÅ
-define ('SYS_VER', 'beta 1.00');
-define ('SYS_VER_TIME', '20140916');
+define ('SYS_VER', 'beta 1.01');
+define ('SYS_VER_TIME', '20140925');
 
 header("Content-type: text/html;charset=utf-8");
 

@@ -19,7 +19,7 @@ defined('IN_MET') or exit('No permission');
  * @param string $page			后台跳转到的页码
  * @param string $met_pageskin	分页样式：前台默认样式5，后台的固定了。
  */
-class Pager {
+class pager {
 	private $total;				
 	private $pagesize;				
 	private $pages;					

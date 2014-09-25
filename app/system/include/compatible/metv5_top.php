@@ -17,7 +17,9 @@ if(substr($control['content'],0,4)!='own/'){
 $PHP_SELFs = explode('/', PHP_SELF);
 $query = "SELECT * FROM {$_M['table'][column]} where foldername = '{$PHP_SELFs[count($PHP_SELFs)-2]}' and lang='{$_M['lang']}'";
 $column = DB::get_one($query);
-
+if($control['left'] > 1){
+	$is_memberleft = 1;
+}
 //设置SEO参数
 switch($_M['config']['met_title_type']){
     case 0:
@@ -32,10 +34,10 @@ switch($_M['config']['met_title_type']){
 	case 3:
 		$webtitle = $_M['config']['met_keywords'].'-'.$_M['config']['met_webname'];
 }
-$met_title=$webtitle;
+$met_title = $webtitle;
 
-$met_title=$met_title?$column['name'].'-'.$met_title:$column['name'];
-
+$met_title = $met_title?$column['name'].'-'.$met_title:$column['name'];
+$met_title = $column['ctitle'] ? $column['ctitle'] : $met_title;
 $show['description']=$column['description']?$column['description']:$_M['config']['met_description'];
 $show['keywords']=$column['keywords']?$column['keywords']:$_M['config']['met_keywords'];
 

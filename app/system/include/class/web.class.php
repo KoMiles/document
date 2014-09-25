@@ -17,14 +17,11 @@ class web extends common {
 	public function __construct() {
 		parent::__construct();
 		global $_M;
-		//模板根目录
-		define('PATH_TEM', PATH_WEB."templates/".$_M['config']['met_skin_user'].'/');
-		$this->load_language();
-		//读取已登陆会员信息
-		met_cooike_start();
-		//加载插件
-		load::plugin('web');
-		$this->load_publuc_data();
+		define('PATH_TEM', PATH_WEB."templates/".$_M['config']['met_skin_user'].'/');//模板根目录
+		$this->load_language();//语言加载
+		met_cooike_start();//读取已登陆会员信息
+		$this->load_publuc_data();//加载公共数据
+		load::plugin('doweb');//加载插件
 	}
 	
 	/**
@@ -122,39 +119,18 @@ class web extends common {
 	  * @param int 会员组编号
 	  * 如果会员拥有权限则，程序代码向后正常执行，如果没有则提示没有权限。
 	  */
-	protected function check($power=0) {
+	protected function check($power = 0) {
 		global $_M;
+		
 		$metinfo_member_name = get_met_cookie('metinfo_admin_name');
-		if ($metinfo_member_name) {
+		if (!$metinfo_member_name) {
 			$metinfo_member_name = get_met_cookie('metinfo_member_name');
 		}
 		$metinfo_member_pass = get_met_cookie('metinfo_admin_pass');
-		if ($metinfo_member_pass) {
+		if (!$metinfo_member_pass) {
 			$metinfo_member_pass = get_met_cookie('metinfo_member_pass');
 		}
-		$current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-		if (strstr($current_url, $_M[url][site]."member/index.php")) {
-			$memberindex = "metinfo";
-		}else{
-			$memberindex = '';
-		}
-		if ($memberindex != "metinfo") {
-			$returnurl = $_M[url][site]."member/login.php?lang=".$_M[lang];
-			if (!$metinfo_member_name||!$metinfo_member_pass) {
-				met_cooike_unset();
-				Header("Location:$returnurl");
-				exit;
-			} else {
-				$query = "SELECT * FROM {$_M['table']['admin_table']} WHERE admin_id='{$metinfo_member_name}' AND admin_pass='{$metinfo_member_pass}'";
-				$membercp_ok = DB::get_one($query);
-				if (!$membercp_ok) {
-					met_cooike_unset();
-					Header("Location: $returnurl");
-					exit;
-				}
-				
-			}
-		}
+		
 		$query = "SELECT * FROM {$_M['table']['admin_table']} WHERE admin_id='{$metinfo_member_name}' AND admin_pass='{$metinfo_member_pass}'";
 		$membercp_ok = DB::get_one($query);
 		if ($membercp_ok) {
@@ -167,16 +143,15 @@ class web extends common {
 			}
 		}else{
 			okinfo('javascript:window.history.back();', $_M['word']['htmpermission']);
-		}
-			
+		}	
 	}
 	
 	/**
 	  * 应用兼容模式加载前台模板，会自动加载当前选定模板的顶部，尾部，左侧导航(可选)，只有内容主题可以自定义。
 	  * @param string $content 页面主体内容部分调用的文件名，为自定的应用模板文件
-	  * @param int    $left    收加载模板的左侧栏，1:加载，0:不加载
+	  * @param int    $left    收加载模板的左侧栏，2：加载会员左侧导航 1:加载一般页面左侧导航，0:不加载
 	  */
-	public function custom_template($content, $left) {
+	protected function custom_template($content, $left) {
 		global $_M;
 		$_M['custom_template']['content'] = $content;
 		$_M['custom_template']['left'] = $left;

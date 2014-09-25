@@ -17,14 +17,14 @@ class common {
 	  * 初始化
 	  */
 	public function __construct() {
-		global $_M;
-		ob_start();
-		$this->load_mysql();
-		$this->load_form();
-		$this->load_lang();
-		$this->load_config_global();
-		$this->load_config_lang();
-		$this->load_url();
+		global $_M;//全局数组$_M
+		ob_start();//开启缓存
+		$this->load_mysql();//数据库连接
+		$this->load_form();//表单过滤
+		$this->load_lang();//加载语言配置
+		$this->load_config_global();//加载全站配置数据
+		$this->load_config_lang();//加载当前语言配置数据
+		$this->load_url();//加载url数据
 	}	
 	
 	/**
@@ -234,10 +234,11 @@ class common {
 	  */
 	public function __destruct(){
 		global $_M;
+		//读取缓冲区数据
 		$output = str_replace(array('<!--<!---->','<!---->','<!--fck-->','<!--fck','fck-->','',"\r",substr($admin_url,0,-1)),'',ob_get_contents());
-		ob_end_clean();
-		echo $output;
-		DB::close();
+		ob_end_clean();//清空缓冲区
+		echo $output;//输出内容
+		DB::close();//关闭数据库连接
 		exit;
 	}
 } 

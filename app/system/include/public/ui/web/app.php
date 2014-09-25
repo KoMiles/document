@@ -8,7 +8,7 @@ defined('IN_MET') or exit('No permission');
 
 require_once PATH_WEB.'\app\system\include\compatible\metv5_top.php';
 //$control['left'] = 1;
-if($control['left'] == 1){
+if($control['left'] >= 1){
 	if(is_letf_exists('sidebar')){
 		require_once $this->template('tem/head'); 
 		require_once $this->template('tem/sidebar'); 

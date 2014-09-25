@@ -517,16 +517,16 @@ INSERT INTO met_language VALUES('30432','cvall','ALL','0','39','4','0','en');
 
 INSERT INTO met_language VALUES('30761','jsx36','Note: zip format is not allowed to upload, please go to the site safety add upload zip format','1','444','8','0','en');
 INSERT INTO met_language VALUES('30764','jsx37','Note: SQL formats are not allowed to upload, please go to the site safety add SQL upload format','1','445','8','0','en');
-INSERT INTO met_language VALUES('30767','jsx38',"You don't have full control permissions, please contact your administrator",'1','446','8','0','en');
+INSERT INTO met_language VALUES('30767','jsx38','You do not have full control permissions, please contact your administrator','1','446','8','0','en');
 INSERT INTO met_language VALUES('30770','appmodule','Application module','1','1','3','0','en');
-INSERT INTO met_language VALUES('30773','formerror1','Please fill in this field.','1','0','8','','en');
-INSERT INTO met_language VALUES('30776','formerror2','Please choose one of these options.','1','0','8','','en');
-INSERT INTO met_language VALUES('30779','formerror3','Please enter the correct phone number.','1','0','8','','en');
-INSERT INTO met_language VALUES('30782','formerror4','Please enter the correct Email address.','1','0','8','','en');
-INSERT INTO met_language VALUES('30785','formerror5','Two input password, please enter again.','1','0','8','','en');
-INSERT INTO met_language VALUES('30788','formerror6','Please enter at least & metinfo & characters.','1','0','8','','en');
-INSERT INTO met_language VALUES('30791','formerror7','Enter no more than & metinfo & characters.','1','0','8','','en');
-INSERT INTO met_language VALUES('30794','formerror8','Enter the number of characters must be between & metinfo &.','1','0','8','','en');
+INSERT INTO met_language VALUES('30773','formerror1','Please fill in this field.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30776','formerror2','Please choose one of these options.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30779','formerror3','Please enter the correct phone number.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30782','formerror4','Please enter the correct Email address.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30785','formerror5','Two input password, please enter again.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30788','formerror6','Please enter at least & metinfo & characters.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30791','formerror7','Enter no more than & metinfo & characters.','1','0','8','0','en');
+INSERT INTO met_language VALUES('30794','formerror8','Enter the number of characters must be between & metinfo &.','1','0','8','0','en');
 
 
 

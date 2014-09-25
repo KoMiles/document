@@ -1530,7 +1530,7 @@ function establish_appmodule($foldername,$no){
 		}
 		$structure1=$db->get_all("select * from $met_ifcolumn_addfile where no='$no'");
 		foreach($structure1 as $key=>$val){
-			$straction[$val[filename]].="define('M_NAME', '".$val['m_name']."');\ndefine('M_MODULE', '".$val['m_module']."');\ndefine('M_PATH', '');\ndefine('M_CLASS', '".$val['m_class']."');\n";
+			$straction[$val[filename]].="define('M_NAME', '".$val['m_name']."');\ndefine('M_MODULE', '".$val['m_module']."');\ndefine('M_CLASS', '".$val['m_class']."');\n";
 			if(substr($val['m_action'], 0, 1) == '$'){
 				$straction[$val[filename]].="define('M_ACTION', ".$val['m_action'].");\n";
 			}else{
