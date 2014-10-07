@@ -174,17 +174,6 @@ if($action=="add"){
 	okinfo($returnurl,"{$lang_MessageInfo2}");
 
 }else{
-	$fdjs="<script language='javascript'>";
-	$fdjs=$fdjs."function Checkmessage(){ ";
-	$fdjs=$fdjs."if (document.myform.pname.value.length == 0) {";
-	$fdjs=$fdjs."alert('{$lang_MessageInfo3}');";
-	$fdjs=$fdjs."document.myform.pname.focus();";
-	$fdjs=$fdjs."return false;}";
-	$fdjs=$fdjs."if (document.myform.info.value.length == 0) {";
-	$fdjs=$fdjs."alert('{$lang_MessageInfo4}');";
-	$fdjs=$fdjs."document.myform.info.focus();";
-	$fdjs=$fdjs."return false;}";
-	$fdjs=$fdjs."}</script>";
 	$class2=$class_list[$class1][releclass]?$class1:$class2;
 	$class1=$class_list[$class1][releclass]?$class_list[$class1][releclass]:$class1;
 	$class_info=$class2?$class2_info:$class1_info;
@@ -211,8 +200,7 @@ if($action=="add"){
 		}
 	}
 	require_once '../public/php/methtml.inc.php';
-	$methtml_message=$fdjs;
-	$methtml_message.=metlabel_messageold();
+	$methtml_message = metlabel_messageold();
 	include template('message');
 	footer();
 }

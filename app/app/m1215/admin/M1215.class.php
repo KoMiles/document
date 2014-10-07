@@ -7,14 +7,15 @@
 
 defined('IN_MET') or exit('No permission');
 load::sys_class('admin');
-class M1215 extends admin {
+class m1215 extends admin {
 	public function __construct() {
 		parent::__construct();
 	}
 
 	public function doindex() {
-		$num = 1215;
-		echo '学号为'.$num.'admin应用模块';
+        global $_M;
+        $num = 1215;
+        require $this->template('own/index');
 	}
 }
 ?>

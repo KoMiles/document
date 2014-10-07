@@ -1981,7 +1981,7 @@ INSERT INTO met_language VALUES('27721','nursetips39','Friends of the chain to r
 INSERT INTO met_language VALUES('27722','nursetips40','daily reminder times','1','348','6','0','en');
 INSERT INTO met_language VALUES('27720','nursetips38','Whenever a visitor to submit an application Links the system will send a URL and site name with the other SMS to your phone','1','346','6','0','en');
 INSERT INTO met_language VALUES('27719','nursetips37','resume remind','1','345','6','0','en');
-INSERT INTO met_language VALUES('27718','nursetips36','Whenever a visitor to submit your resume , the system will send a delivery job with the candidate ''s name and message to your phone','1','344','6','0','en');
+INSERT INTO met_language VALUES('27718','nursetips36','Every time a visitor to submit a resume, system will send a text message containing the delivery position and the name of the applicant to your mobile phone','1','344','6','0','en');
 INSERT INTO met_language VALUES('27717','nursetips35','Message alert','1','343','6','0','en');
 INSERT INTO met_language VALUES('27716','nursetips34','whenever a visitor to submit comments system will send a message containing content ( the first 10 characters ) of text messages to your phone','1','342','6','0','en');
 INSERT INTO met_language VALUES('27715','nursetips33','Feedback remind','1','341','6','0','en');
@@ -2668,7 +2668,7 @@ INSERT INTO met_language VALUES('27040','fdincTip4','seconds , the same IP2 the 
 INSERT INTO met_language VALUES('27035','jobmanagement','Job Management','1','48','4','0','en');
 INSERT INTO met_language VALUES('27033','jobtip8','image field Name','1','46','4','0','en');
 INSERT INTO met_language VALUES('27034','jobtip9','Biography photos, so the message can be seen in the candidates to upload photos.','1','47','4','0','en');
-INSERT INTO met_language VALUES('27032','jobtip5','resume after the system will automatically send a message to the recipient''s mailbox','1','45','4','0','en');
+INSERT INTO met_language VALUES('27032','jobtip5','Resume after the system will automatically send an email to receive email','1','45','4','0','en');
 INSERT INTO met_language VALUES('27031','cvset','resume form set','1','44','4','0','en');
 INSERT INTO met_language VALUES('27030','cvmanagement','resume information management','1','43','4','0','en');
 INSERT INTO met_language VALUES('27029','cvemail','Biography accepting mail','1','42','4','0','en');

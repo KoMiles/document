@@ -231,7 +231,7 @@ have=1
 filesize=4582
 [message/message.php]
 have=1
-filesize=6921
+filesize=6448
 [news/index.php]
 have=1
 filesize=381
@@ -324,7 +324,7 @@ have=1
 filesize=51742
 [public/php/metlabel.inc.php]
 have=1
-filesize=72644
+filesize=82317
 [public/php/newshtml.inc.php]
 have=1
 filesize=4005
